@@ -1,13 +1,19 @@
 <script>
   function crearTablaContactos()
   {
+    let tabla = document.getElementById('tablaContactos');
+    if(tabla) tabla.remove();
+
     google.script.run.withSuccessHandler(
       function(obj)
       {
-        let tabla = document.createElement('table');
+        tabla = document.createElement('table')
+        tabla.id = 'tablaContactos';
+
+        let tablaHeader = document.createElement('thead');
         let tablaBody = document.createElement('tbody');
 
-        Array.from(obj).forEach(filaActual =>
+        Array.from(obj).forEach((filaActual, i) =>
         {
           let fila = document.createElement('tr');
           filaActual.forEach(celdaActual =>
@@ -16,13 +22,23 @@
             celda.textContent = celdaActual;
             fila.appendChild(celda);
           });
-          tablaBody.appendChild(fila);
+          if(i == 0)
+          {
+            tablaHeader.appendChild(fila);
+            tabla.appendChild(tablaHeader);
+          }
+          else
+          {
+            tablaBody.appendChild(fila);
+
+          }
         });
-        
+        //agregamos clases a la cabecera
+        tablaHeader.classList.add('table-dark');
         //Agregamos el cuerpo de la tabla
         tabla.appendChild(tablaBody);
         //Agregamos clases a la tabla
-        tabla.classList.add('table','table-striped','border-3','table-success');
+        tabla.classList.add('table','table-striped','border-3');
         //Agregamos tabla a la página 
         document.getElementById('divContactos').appendChild(tabla);
 
