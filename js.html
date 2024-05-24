@@ -1,0 +1,35 @@
+<script>
+  function crearTablaContactos()
+  {
+    google.script.run.withSuccessHandler(
+      function(obj)
+      {
+        let tabla = document.createElement('table');
+        let tablaBody = document.createElement('tbody');
+
+        Array.from(obj).forEach(filaActual =>
+        {
+          let fila = document.createElement('tr');
+          filaActual.forEach(celdaActual =>
+          {
+            let celda = document.createElement('td');
+            celda.textContent = celdaActual;
+            fila.appendChild(celda);
+          });
+          tablaBody.appendChild(fila);
+        });
+        
+        //Agregamos el cuerpo de la tabla
+        tabla.appendChild(tablaBody);
+        //Agregamos clases a la tabla
+        tabla.classList.add('table','table-striped','border-3','table-success');
+        //Agregamos tabla a la página 
+        document.getElementById('divContactos').appendChild(tabla);
+
+      }
+
+
+
+    ).obtenerContactos();
+  }
+</script>
