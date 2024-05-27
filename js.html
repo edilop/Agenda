@@ -1,5 +1,5 @@
 <script>
-
+// -----------TABLA DE CONTACTOS-----------------------------
 // Invocar la tabla de contactos
   function crearTablaContactos() {
     let tabla = document.getElementById('tablaContactos');
@@ -10,7 +10,6 @@
       .withFailureHandler(crearTablaContactosError)
       .obtenerContactos();
   }
-
   // Crear la estructura de la tabla de contactos
   function crearContactosCorrectamente(obj) 
   {
@@ -29,7 +28,6 @@
     }
     tablaHeader.appendChild(primeraFila);
     tabla.appendChild(tablaHeader);
-
     // Body de la tabla
     for (let i = 1; i < obj.length; i++) 
     {
@@ -49,17 +47,17 @@
     tabla.classList.add('table', 'table-striped', 'border-4', 'border-dark');
     // Agregar tabla a la página
     document.getElementById('divContactos').appendChild(tabla);
-
     // Mostrar notificación de éxito
     crearNotificacionOK('Contactos obtenidos correctamente', 'Todo en orden');
   }
-
   // Crear la respuesta en caso de error al crear la tabla de contactos
   function crearTablaContactosError() {
     // Mostrar notificación de error
     crearNotificacionError('Error al obtener contactos', 'Error');
   }
 
+  // --------------NOTIFICACIONES--------------
+  // Crear la estructura base de la notificación
   function crearNotificacion(mensaje, titulo)
   {
     document.getElementById('mensajeNotificacion').textContent = mensaje;
@@ -67,50 +65,46 @@
     let elementoNotificacion = document.getElementById('notificacion');
     bootstrap.Toast.getOrCreateInstance(elementoNotificacion).show();
   }
-
-
+// Notificación de OK
   function crearNotificacionOK(mensaje, titulo)
   {
     crearNotificacion(mensaje, titulo);
     crearIconoNotificacionOK();
     crearColorNotificacion('--color-verde-oscuro');
   }
-
-
+// Notificación de error
   function crearNotificacionError(mensaje, titulo)
   {
     crearNotificacion(mensaje, titulo);
     crearIconoNotificacionError();
     crearColorNotificacion('--color-rojo-oscuro')
   }
-
-
+// Notificación de Advertencia
   function crearNotificacionAdvertencia(mensaje, titulo)
   {
     crearNotificacion(mensaje, titulo);
     crearIconoNotificacionAdvertencia();
     crearColorNotificacion('--color-amarillo-oscuro')
   }
-
-
+// Icono de la notificación de OK
   function crearIconoNotificacionOK()
   {
     document.getElementById('iconoNotificacion').className='';
     document.getElementById('iconoNotificacion').classList.add('bi', 'bi-check2-square');
   }
-
+// Icono de la notificación de Error
   function crearIconoNotificacionError()
   {
     document.getElementById('iconoNotificacion').className='';
     document.getElementById('iconoNotificacion').classList.add('bi', 'bi-bug');
   }
-
+// Icono de la notificación de Advertencia
   function crearIconoNotificacionAdvertencia()
   {
     document.getElementById('iconoNotificacion').className='';
     document.getElementById('iconoNotificacion').classList.add('bi', 'bi-exclamation-square');
   }
-
+// Color de la notificación
   function crearColorNotificacion(color)
   {
     let elementoNotificacion = document.getElementById('notificacion');
